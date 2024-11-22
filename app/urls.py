@@ -36,4 +36,5 @@ urlpatterns = [
             namespace='construction_management.construction_management-api',
         ),
     ),
+    path('', include('construction_management.urls')),
 ]

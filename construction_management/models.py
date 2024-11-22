@@ -21,6 +21,10 @@ class OperationalActivity(models.Model):
     description = models.TextField(blank=True)
     is_archived = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = 'Operational Activity'
+        verbose_name_plural = 'Operational Activities'
+
     def __str__(self):
         return self.name
 
