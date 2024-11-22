@@ -2,5 +2,16 @@
 {% load static %}
 {% block title %}Manage Constructions{% endblock %}
 {% block content %}
-    
+<div class="row">
+    {% for construction in constructions %}
+        <div class="col-md-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ construction.name }}</h5>
+                <p class="card-text">{{ construction.localization }}</p>
+                <p class="card-text">{{ construction.working_hours }}</p>
+                <a href="{% url 'construction_management:construction_detail' construction.id %}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

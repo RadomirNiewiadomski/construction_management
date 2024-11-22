@@ -2,5 +2,15 @@
 {% load static %}
 {% block title %}Manage Operational Activities{% endblock %}
 {% block content %}
-    
+<div class="row">
+    {% for operational_activity in operational_activities %}
+        <div class="col-md-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ operational_activity.name }}</h5>
+                <p class="card-text">{{ operational_activity.description }}</p>
+                <a href="{% url 'operational_activity_management:operational_activity_detail' operational_activity.id %}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

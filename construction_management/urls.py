@@ -1,7 +1,14 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
-from .views import ConstructionListView, ReportListView, OperationalActivitiesListView
+from .views import (
+    ConstructionListView,
+    ReportListView,
+    OperationalActivitiesListView,
+    ConstructionDetailView,
+    ReportDetailView,
+    OperationalActivityDetailView,
+)
 
 app_name = 'construction_management'
 
@@ -13,5 +20,12 @@ urlpatterns = [
         'manage_operational_activities/',
         OperationalActivitiesListView.as_view(),
         name='manage_operational_activities',
+    ),
+    path('construction/<int:pk>/', ConstructionDetailView.as_view(), name='construction_detail'),
+    path('report/<int:pk>/', ReportDetailView.as_view(), name='report_detail'),
+    path(
+        'operational_activity/<int:pk>/',
+        OperationalActivityDetailView.as_view(),
+        name='operation_activity_detail',
     ),
 ]
