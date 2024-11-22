@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Lista Użytkowników{% endblock %}
+
+{% block content %}
+<h1>Lista Użytkowników</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Rola</th>
+            <th>Opcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+                <a href="{% url 'user:edit_user' user.id %}" class="btn btn-primary btn-sm">Edytuj</a>
+                <a href="{% url 'user:delete_user' user.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Czy na pewno usunąć użytkownika?')">Usuń</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'user:create_user' %}" class="btn btn-success">Dodaj użytkownika</a>
+{% endblock %}

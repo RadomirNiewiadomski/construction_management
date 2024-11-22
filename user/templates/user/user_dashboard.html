@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Moduł Użytkownika{% endblock %}
+
+{% block content %}
+<h1>Moduł Użytkownika</h1>
+<div class="list-group">
+    <a href="{% url 'construction_management:add_entry' %}" class="list-group-item list-group-item-action">Dodaj nowy wpis</a>
+    <a href="{% url 'construction_management:view_entries' %}" class="list-group-item list-group-item-action">Przeglądaj swoje wpisy</a>
+</div>
+{% endblock %}
