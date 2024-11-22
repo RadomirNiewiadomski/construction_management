@@ -1,5 +1,5 @@
 """
-Views for the reviews API.
+Viewsets for the construction management API.
 """
 
 from rest_framework.decorators import action
