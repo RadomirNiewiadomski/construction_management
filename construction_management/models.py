@@ -44,7 +44,9 @@ class Report(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     construction = models.ForeignKey(Construction, on_delete=models.CASCADE)
-    operational_activity = models.ManyToManyField(OperationalActivity)
+    operational_activity = models.ForeignKey(
+        OperationalActivity, on_delete=models.CASCADE, blank=True, null=True
+    )
     content = models.TextField()
     # TODO: change to upload multiple imgs (max 5)
     images = models.ImageField(null=True, blank=True, upload_to=report_image_file_path)
