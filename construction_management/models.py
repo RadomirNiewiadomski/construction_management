@@ -33,8 +33,18 @@ class Construction(models.Model):
     name = models.CharField(max_length=255)
     localization = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    working_hours = models.CharField(max_length=255)
+    working_hours = models.CharField(max_length=50, default='08:00-17:00')
     is_archived = models.BooleanField(default=False)
+
+    def archive(self):
+        """Mark construction as archived."""
+        self.is_archived = True
+        self.save()
+
+    def update_working_hours(self, hours):
+        """Update working hours for the construction."""
+        self.working_hours = hours
+        self.save()
 
     def __str__(self):
         return self.name

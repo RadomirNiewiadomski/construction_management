@@ -13,7 +13,7 @@ class IndexView(TemplateView):
 
 class ConstructionListView(ListView):
     model = Construction
-    template_name = "manage_construcions.html"
+    template_name = "manage_constructions.html"
     context_object_name = "constructions"
 
 

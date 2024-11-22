@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from construction_management import serializers
 from construction_management.models import Construction, Report, OperationalActivity
+from construction_management.serializers import ConstructionSerializer, ConstructionUpdateSerializer
 
 
 class OperationalActivityViewSet(viewsets.ModelViewSet):
@@ -33,8 +34,26 @@ class ConstructionViewSet(viewsets.ModelViewSet):
         """Return serializer class for request."""
         if self.action == 'list':
             return serializers.ConstructionSerializer
-
+        if self.action == 'update_working_hours':
+            return serializers.ConstructionUpdateSerializer
         return self.serializer_class
+
+    @action(detail=True, methods=['post'])
+    def archive(self, request, pk=None):
+        """Mark a construction as archived."""
+        construction = self.get_object()
+        construction.archive()
+        return Response({'status': 'Construction archived'})
+
+    @action(detail=True, methods=['post'])
+    def update_working_hours(self, request, pk=None):
+        """Update the working hours of a construction."""
+        construction = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            construction.update_working_hours(serializer.validated_data['working_hours'])
+            return Response({'status': 'Working hours updated'})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ReportViewSet(viewsets.ModelViewSet):

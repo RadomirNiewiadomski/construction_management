@@ -16,11 +16,13 @@ class OperationalActivitySerializer(serializers.ModelSerializer):
 
 
 class ConstructionSerializer(serializers.ModelSerializer):
-    """Serializer for Construction."""
-
     class Meta:
         model = Construction
-        fields = '__all__'
+        fields = ['id', 'name', 'localization', 'description', 'working_hours', 'is_archived']
+
+
+class ConstructionUpdateSerializer(serializers.Serializer):
+    working_hours = serializers.CharField(max_length=50)
 
 
 class ReportSerializer(serializers.ModelSerializer):
