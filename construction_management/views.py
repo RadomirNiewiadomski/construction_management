@@ -1,10 +1,14 @@
 import json
 
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Construction, Report, OperationalActivity
+
+
+class IndexView(TemplateView):
+    template_name = "index.html"
 
 
 class ConstructionListView(ListView):
