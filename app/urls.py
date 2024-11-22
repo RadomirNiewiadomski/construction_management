@@ -28,7 +28,7 @@ urlpatterns = [
         name='api-docs',
     ),
     path('api/user/', include('user.urls', namespace='user-api')),
-    # path('user/', include('user.urls_login', namespace='user-login')),
+    path('user/', include('user.urls_login', namespace='user-login')),
     path(
         'api/construction_management/',
         include(

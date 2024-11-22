@@ -1,15 +1,16 @@
-# """
-# URL mappings for the user login.
-# """
+"""
+URL mappings for the user login.
+"""
 
-# from django.urls import path
-# from django.contrib.auth.views import LogoutView
+from django.urls import path
+from django.contrib.auth.views import LogoutView
 
-# from .views import login_view
+from user import views
 
-# app_name = 'user-login'
+app_name = 'user-login'
 
-# urlpatterns = [
-#     path('login/', login_view, name='login'),
-#     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
-# ]
+urlpatterns = [
+    path('register/', views.register_user, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+]

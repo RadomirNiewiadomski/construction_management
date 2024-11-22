@@ -16,11 +16,21 @@ def report_image_file_path(instance, filename):
     return os.path.join('uploads', 'report', filename)
 
 
+class OperationalActivity(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    is_archived = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
 class Construction(models.Model):
     name = models.CharField(max_length=255)
     localization = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     working_hours = models.CharField(max_length=255)
+    is_archived = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -30,7 +40,7 @@ class Report(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     construction = models.ForeignKey(Construction, on_delete=models.CASCADE)
-    operational_activity = models.CharField(max_length=255, blank=True)
+    operational_activity = models.ManyToManyField(OperationalActivity)
     content = models.TextField()
     # TODO: change to upload multiple imgs (max 5)
     images = models.ImageField(null=True, blank=True, upload_to=report_image_file_path)

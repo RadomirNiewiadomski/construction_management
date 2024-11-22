@@ -4,6 +4,9 @@ Forms for user.
 
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+from .models import User
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -13,3 +16,15 @@ class CustomAuthenticationForm(AuthenticationForm):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
     )
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'position', 'role']
+
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'position', 'role']

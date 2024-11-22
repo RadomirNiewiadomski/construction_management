@@ -6,10 +6,19 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 from construction_management import serializers
-from construction_management.models import Construction, Report
+from construction_management.models import Construction, Report, OperationalActivity
+
+
+class OperationalActivityViewSet(viewsets.ModelViewSet):
+    """View for manage operational activity APIs."""
+
+    serializer_class = serializers.OperationalActivitySerializer
+    queryset = OperationalActivity.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class ConstructionViewSet(viewsets.ModelViewSet):
@@ -18,7 +27,7 @@ class ConstructionViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ConstructionDetailSerializer
     queryset = Construction.objects.all()
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         """Return serializer class for request."""
@@ -34,7 +43,7 @@ class ReportViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ReportSerializer
     queryset = Report.objects.all()
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         """Return serializer class for request."""

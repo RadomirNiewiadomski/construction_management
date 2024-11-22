@@ -4,7 +4,15 @@ Serializers for menu API.
 
 from rest_framework import serializers
 
-from construction_management.models import Construction, Report
+from construction_management.models import Construction, Report, OperationalActivity
+
+
+class OperationalActivitySerializer(serializers.ModelSerializer):
+    """Serializer for Operational Activity."""
+
+    class Meta:
+        model = OperationalActivity
+        fields = '__all__'
 
 
 class ConstructionSerializer(serializers.ModelSerializer):
